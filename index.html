@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Finora — bilingual personal finance and fintech dashboard portfolio demo.">
+  <meta name="theme-color" content="#11141D">
+  <title>Finora | Personal Finance</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="loader" id="loader">
+    <img src="assets/logo.svg" alt="">
+    <span>Finora</span>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#overview">
+        <img src="assets/logo.svg" alt="Finora logo">
+        <span>Finora</span>
+      </a>
+
+      <nav class="desktop-nav">
+        <a href="#overview" data-i18n="nav.overview">Overview</a>
+        <a href="#transactions" data-i18n="nav.transactions">Transactions</a>
+        <a href="#budgets" data-i18n="nav.budgets">Budgets</a>
+        <a href="#goals" data-i18n="nav.goals">Goals</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="currency-switch">
+          <button id="currencyMZN" class="active">MZN</button>
+          <button id="currencyUSD">USD</button>
+        </div>
+        <div class="lang-switch">
+          <button id="langEN" class="active">EN</button>
+          <button id="langPT">PT</button>
+        </div>
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
+          <svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>
+        </button>
+        <button class="mobile-menu" id="mobileMenu">☰</button>
+      </div>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#overview" data-i18n="nav.overview">Overview</a>
+      <a href="#transactions" data-i18n="nav.transactions">Transactions</a>
+      <a href="#budgets" data-i18n="nav.budgets">Budgets</a>
+      <a href="#goals" data-i18n="nav.goals">Goals</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="overview">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow" data-i18n="hero.eyebrow">PERSONAL FINANCE, MADE CLEAR</span>
+          <h1 data-i18n="hero.title">Know where your money goes.</h1>
+          <p data-i18n="hero.text">Track spending, monitor budgets and build savings goals from one clean dashboard.</p>
+
+          <div class="hero-actions">
+            <button class="primary-btn" id="addTransactionHero">+ <span data-i18n="actions.addTransaction">Add transaction</span></button>
+            <a class="secondary-btn" href="#budgets" data-i18n="actions.viewBudgets">View budgets</a>
+          </div>
+
+          <div class="hero-stats">
+            <div><strong id="heroBalance">0</strong><span data-i18n="hero.balance">Current balance</span></div>
+            <div><strong id="heroSaved">0%</strong><span data-i18n="hero.saved">Savings rate</span></div>
+            <div><strong id="heroBudget">0%</strong><span data-i18n="hero.budget">Budget used</span></div>
+          </div>
+        </div>
+
+        <div class="hero-art reveal">
+          <img src="assets/illustrations/finance.svg" alt="Finance dashboard illustration">
+          <div class="float-card income-card">
+            <span class="float-icon up">↗</span>
+            <div><small data-i18n="hero.income">Income this month</small><strong id="heroIncome">0</strong></div>
+          </div>
+          <div class="float-card expense-card">
+            <span class="float-icon down">↘</span>
+            <div><small data-i18n="hero.expenses">Expenses this month</small><strong id="heroExpenses">0</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dashboard-section">
+      <div class="container">
+        <div class="metric-grid">
+          <article class="metric-card reveal">
+            <div class="metric-top"><span data-i18n="metrics.balance">Balance</span><b class="positive">↗ 8.4%</b></div>
+            <strong id="metricBalance">0</strong>
+            <small data-i18n="metrics.balanceDesc">Available across tracked accounts</small>
+          </article>
+          <article class="metric-card reveal">
+            <div class="metric-top"><span data-i18n="metrics.income">Income</span><b class="positive">+12%</b></div>
+            <strong id="metricIncome">0</strong>
+            <small data-i18n="metrics.incomeDesc">Total income in the selected month</small>
+          </article>
+          <article class="metric-card reveal">
+            <div class="metric-top"><span data-i18n="metrics.expenses">Expenses</span><b class="negative">-5%</b></div>
+            <strong id="metricExpenses">0</strong>
+            <small data-i18n="metrics.expensesDesc">Total expenses in the selected month</small>
+          </article>
+          <article class="metric-card reveal">
+            <div class="metric-top"><span data-i18n="metrics.savings">Savings</span><b class="positive" id="metricSavingsRate">0%</b></div>
+            <strong id="metricSavings">0</strong>
+            <small data-i18n="metrics.savingsDesc">Income remaining after expenses</small>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <section class="panel reveal">
+            <div class="panel-head">
+              <div><h2 data-i18n="chart.title">Cash flow</h2><p data-i18n="chart.text">Income and expenses over the last 6 months.</p></div>
+              <select id="chartRange">
+                <option value="6" data-i18n="chart.sixMonths">6 months</option>
+                <option value="3" data-i18n="chart.threeMonths">3 months</option>
+              </select>
+            </div>
+            <div class="chart-wrap">
+              <svg id="cashflowChart" viewBox="0 0 680 250" preserveAspectRatio="none"></svg>
+            </div>
+            <div class="chart-legend">
+              <span><i class="dot income"></i><span data-i18n="chart.income">Income</span></span>
+              <span><i class="dot expense"></i><span data-i18n="chart.expenses">Expenses</span></span>
+            </div>
+          </section>
+
+          <section class="panel reveal">
+            <div class="panel-head">
+              <div><h2 data-i18n="spending.title">Spending by category</h2><p data-i18n="spending.text">Where most of your money goes.</p></div>
+            </div>
+            <div class="category-list" id="categoryList"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="transactions">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow" data-i18n="transactions.eyebrow">ACTIVITY</span>
+            <h2 data-i18n="transactions.title">Recent transactions</h2>
+          </div>
+          <button class="primary-btn" id="addTransactionBtn">+ <span data-i18n="actions.addTransaction">Add transaction</span></button>
+        </div>
+
+        <div class="transaction-toolbar">
+          <label class="search-box">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+            <input id="transactionSearch" type="search" placeholder="Search transaction">
+          </label>
+          <select id="transactionFilter">
+            <option value="all" data-i18n="filter.all">All</option>
+            <option value="income" data-i18n="filter.income">Income</option>
+            <option value="expense" data-i18n="filter.expense">Expenses</option>
+          </select>
+        </div>
+
+        <div class="transaction-list" id="transactionList"></div>
+      </div>
+    </section>
+
+    <section class="section soft-section" id="budgets">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow" data-i18n="budgets.eyebrow">MONTHLY LIMITS</span>
+            <h2 data-i18n="budgets.title">Budgets</h2>
+          </div>
+          <p data-i18n="budgets.text">See how much of each monthly category budget has been used.</p>
+        </div>
+        <div class="budget-grid" id="budgetGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="goals">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow" data-i18n="goals.eyebrow">SAVINGS</span>
+            <h2 data-i18n="goals.title">Savings goals</h2>
+          </div>
+          <button class="secondary-btn" id="addGoalBtn">+ <span data-i18n="goals.new">New goal</span></button>
+        </div>
+        <div class="goal-grid" id="goalGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <a class="brand footer-brand" href="#overview"><img src="assets/logo.svg" alt=""><span>Finora</span></a>
+        <p data-i18n="footer.demo">Personal finance dashboard demo created for a developer portfolio.</p>
+      </div>
+      <div><h4 data-i18n="footer.product">Product</h4><a href="#transactions" data-i18n="nav.transactions">Transactions</a><a href="#budgets" data-i18n="nav.budgets">Budgets</a></div>
+      <div><h4 data-i18n="footer.note">Demo note</h4><p data-i18n="footer.local">Demo data is stored locally in your browser.</p></div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> Finora</span><span>Portfolio project · EN / PT</span></div>
+  </footer>
+
+  <div class="modal" id="transactionModal">
+    <div class="modal-card">
+      <button class="modal-close" data-close="transactionModal">×</button>
+      <span class="eyebrow" data-i18n="modal.transactionEyebrow">NEW TRANSACTION</span>
+      <h2 data-i18n="modal.transactionTitle">Add transaction</h2>
+      <form id="transactionForm">
+        <div class="form-grid">
+          <label><span data-i18n="form.type">Type</span>
+            <select name="type">
+              <option value="expense" data-i18n="filter.expense">Expense</option>
+              <option value="income" data-i18n="filter.income">Income</option>
+            </select>
+          </label>
+          <label><span data-i18n="form.amount">Amount</span><input name="amount" type="number" min="1" required placeholder="2500"></label>
+        </div>
+        <label><span data-i18n="form.description">Description</span><input name="description" required placeholder="Groceries"></label>
+        <div class="form-grid">
+          <label><span data-i18n="form.category">Category</span>
+            <select name="category">
+              <option value="salary">Salary</option>
+              <option value="food">Food</option>
+              <option value="transport">Transport</option>
+              <option value="shopping">Shopping</option>
+              <option value="utilities">Utilities</option>
+              <option value="health">Health</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label><span data-i18n="form.date">Date</span><input name="date" type="date" required></label>
+        </div>
+        <button class="primary-btn full" type="submit" data-i18n="form.saveTransaction">Save transaction</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="goalModal">
+    <div class="modal-card small-modal">
+      <button class="modal-close" data-close="goalModal">×</button>
+      <span class="eyebrow" data-i18n="modal.goalEyebrow">NEW SAVINGS GOAL</span>
+      <h2 data-i18n="modal.goalTitle">Create goal</h2>
+      <form id="goalForm">
+        <label><span data-i18n="form.goalName">Goal name</span><input name="name" required placeholder="Emergency fund"></label>
+        <div class="form-grid">
+          <label><span data-i18n="form.target">Target</span><input name="target" type="number" min="1" required placeholder="50000"></label>
+          <label><span data-i18n="form.saved">Already saved</span><input name="saved" type="number" min="0" required placeholder="10000"></label>
+        </div>
+        <button class="primary-btn full" type="submit" data-i18n="form.saveGoal">Save goal</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
