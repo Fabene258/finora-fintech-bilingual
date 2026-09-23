@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="500" viewBox="0 0 760 500">
+<defs>
+<linearGradient id="a" x1="0" x2="1"><stop stop-color="#ECEBFF"/><stop offset="1" stop-color="#E1F8F0"/></linearGradient>
+<linearGradient id="b" x1="0" x2="1"><stop stop-color="#5B5BF7"/><stop offset="1" stop-color="#12B886"/></linearGradient>
+<filter id="s"><feDropShadow dx="0" dy="18" stdDeviation="22" flood-opacity=".14"/></filter>
+</defs>
+<rect width="760" height="500" rx="42" fill="url(#a)"/>
+<circle cx="646" cy="76" r="115" fill="white" opacity=".45"/>
+<circle cx="100" cy="420" r="120" fill="white" opacity=".38"/>
+<g filter="url(#s)">
+<rect x="125" y="76" width="510" height="330" rx="34" fill="#11141D"/>
+<rect x="164" y="112" width="150" height="12" rx="6" fill="#747A8A"/>
+<rect x="164" y="145" width="245" height="44" rx="12" fill="white"/>
+<rect x="164" y="213" width="432" height="1" fill="#2F3340"/>
+<path d="M170 332 C220 280 250 315 300 252 C345 198 390 310 455 244 C500 199 540 232 590 176" fill="none" stroke="url(#b)" stroke-width="8" stroke-linecap="round"/>
+<circle cx="170" cy="332" r="7" fill="#5B5BF7"/>
+<circle cx="300" cy="252" r="7" fill="#716FFF"/>
+<circle cx="455" cy="244" r="7" fill="#24A999"/>
+<circle cx="590" cy="176" r="7" fill="#12B886"/>
+<rect x="164" y="354" width="102" height="18" rx="9" fill="#252A35"/>
+<rect x="279" y="354" width="82" height="18" rx="9" fill="#252A35"/>
+</g>
+<g filter="url(#s)">
+<rect x="74" y="104" width="174" height="92" rx="22" fill="white"/>
+<circle cx="108" cy="145" r="18" fill="#E7E6FF"/>
+<path d="M100 145h16M108 137v16" stroke="#5B5BF7" stroke-width="4" stroke-linecap="round"/>
+<rect x="138" y="128" width="84" height="11" rx="5.5" fill="#DDE1E8"/>
+<rect x="138" y="151" width="58" height="9" rx="4.5" fill="#EEF0F3"/>
+</g>
+<g filter="url(#s)">
+<rect x="516" y="336" width="164" height="86" rx="22" fill="white"/>
+<circle cx="550" cy="379" r="18" fill="#DCF7EE"/>
+<path d="M542 380h16M550 372v16" stroke="#12B886" stroke-width="4" stroke-linecap="round"/>
+<rect x="578" y="363" width="75" height="11" rx="5.5" fill="#DDE1E8"/>
+<rect x="578" y="386" width="51" height="9" rx="4.5" fill="#EEF0F3"/>
+</g>
+</svg>
